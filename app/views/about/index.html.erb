@@ -1,0 +1,14 @@
+<div class="about-container">
+    <h1>About</h1>
+
+    <p>This web application uses data from the following sources:</p>
+
+    <ul>
+      <% @data_sources.each do |source| %>
+        <li>
+          <strong><%= link_to source[:name], source[:link] %>:</strong>
+          <%= source[:description] %>
+        </li>
+      <% end %>
+    </ul>
+  </div>

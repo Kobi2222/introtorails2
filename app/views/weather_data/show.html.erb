@@ -1,0 +1,25 @@
+<!-- app/views/weather_data/show.html.erb -->
+<div class="weather-details">
+  <h1>Weather Data Details</h1>
+
+  <dl>
+    <dt>Location:</dt>
+    <dd><%= "#{ @weather_data.location.city },
+             #{ @weather_data.location.country }" %></dd>
+    
+    <dt>Temperature:</dt>
+    <dd><%= @weather_data.temperature %></dd>
+    
+    <dt>Humidity:</dt>
+    <dd><%= @weather_data.humidity %></dd>
+    
+    <dt>Wind Speed:</dt>
+    <dd><%= @weather_data.wind_speed %></dd>
+    
+    <dt>Condition:</dt>
+    <dd><%= @weather_data.condition %></dd>
+  </dl>
+
+  <br>
+  <%= link_to "View Location", location_path(@weather_data.location) %>
+</div>

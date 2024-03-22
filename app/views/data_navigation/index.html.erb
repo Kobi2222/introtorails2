@@ -1,0 +1,46 @@
+<div class="container">
+  <% if @user.admin? %>
+    <h1>Welcome, Admin!</h1>
+  <% else %>
+    <h1>Welcome, User!</h1>
+  <% end %>
+
+  <h2>Data Collection</h2>
+
+  <%= form_with(url: search_path, method: "get") do |form| %>
+    <%= form.text_field :query, value: params[:query], placeholder: "Search..." %>
+    <%= form.collection_select :location_id, Location.all, :id, :city, { include_blank: true }, { selected: params[:location_id] } %>
+    <%= form.submit "Search" %>
+    <%= link_to "Clear", data_navigation_path %>
+  <% end %>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Weather Data#</th>
+        <th>Location</th>
+        <th>Temperature</th>
+        <th>Humidity</th>
+        <th>Wind Speed</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @data_entries.each do |weather_data| %>
+        <tr>
+          <td><%= link_to weather_data.id, weather_datum_path(weather_data.id) %></td>
+          <td><%= "#{weather_data.location.city}, #{weather_data.location.country}" %></td>
+          <td><%= weather_data.temperature %></td>
+          <td><%= weather_data.humidity %></td>
+          <td><%= weather_data.wind_speed %></td>
+          <td><%= weather_data.condition %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= paginate @data_entries %>
+  <br><br>
+</div>
+
+<br><br>
